@@ -1,0 +1,25 @@
+db.drinkType.insertMany([
+  {
+    "drink": "Tea",
+    "cost": 0.4
+  },
+  {
+    "drink": "Coffee",
+    "cost": 0.5
+  },
+  {
+    "drink": "Chocolate",
+    "cost": 0.6
+  }
+])
+
+
+db.orders.insertOne(
+{
+  "drinkType": ObjectId("654564437862b5f02a8aa4fe"),
+  "sugars": 0,
+  "extraHot": false,
+  "money": 0.8,
+  "date": new Date(),
+  "process" : true
+})
