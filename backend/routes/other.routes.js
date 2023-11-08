@@ -96,7 +96,7 @@ router.get('/OrdersExecuted', async(req, res) => {
     }
 });
 
-/* 3. API of all the coffees, teas or chocolates that were prepared, gives me the value of money that was collected according to the drink*/
+/* 4. API of all the coffees, teas or chocolates that were prepared, gives me the value of money that was collected according to the drink*/
 router.get('/Coffees', async(req, res) => {
     try {
         const client = new MongoClient(database);
@@ -204,5 +204,19 @@ router.get('/Chocolates', async(req, res) => {
     }
 });
 
+/* 5. API all drinks*/
+router.get('/allDrinks', async(req, res) => {
+    try {
+        const client = new MongoClient(database);
+        await client.connect();
+        const dataBase = client.db(nameDB);
+        const collection = dataBase.collection('drinkType');
+        const result = await collection.find({}).toArray();
+        res.json(result);
+        client.close;
+    } catch (error) {
+        res.status(404).json("Data not found");
+    }
+});
 
 module.exports = router;
