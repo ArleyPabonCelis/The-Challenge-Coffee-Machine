@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Alumni+Sans+Inline+One&family=Exo+2:ital,wght@1,600&family=Lilita+One&display=swap');
+
+.dad_form{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.bg_form{
+    background-image: url('../img/bg_form.jpg');
+    background-size: cover;
+    border-radius: 10px;
+    width: 900px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title_form{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+}
+
+.title_form h1{
+    /* font-family: 'Exo 2', sans-serif; */
+    font-family: 'Lilita One', sans-serif;
+    font-size: 50px;
+}
+
+.size_title{
+    width: 100px;
+    height: 70px;
+}
+
+.content{
+    display: flex;
+    flex-direction: row;
+    gap: 6rem;
+}
+
+.body_form{
+    border: 3px solid transparent;
+    width: 500px;
+    height: 430px;
+    margin-left: -50px;
+}
+
+.form_coffee{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    font-family: 'Exo 2', sans-serif;
+    gap: 20px;
+}
+
+.choose_drink{
+    border: 1px solid transparent;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.option_drink{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Lilita One', sans-serif;
+    border: 5px solid #804000;
+    color: #804000;
+    border-radius: 15px;
+    font-size: 30px;
+    height: 50px; 
+    text-align: center;
+    cursor: pointer;
+}
+
+.choose_sugar{
+    border: 1px solid transparent;
+    width: 500px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.option_sugar, .option_extrahot, .input_money, .btn_clean{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.option_sugar input{
+    width: 240px;
+    height: 25px;
+    border: 5px solid #804000;
+    color: #804000;
+    border-radius: 10px;
+    font-size: 20px;
+    font-family: 'Lilita One', sans-serif;
+    text-align: center;
+    cursor: pointer;
+}
+
+.option_extrahot select{
+    width: 200px;
+    height: 35px;
+    border: 5px solid #804000;
+    color: #804000;
+    border-radius: 10px;
+    font-size: 20px;
+    font-family: 'Lilita One', sans-serif;
+    text-align: center;
+    cursor: pointer;
+}
+
+.yes_no option{
+    cursor: pointer;
+}
+
+.enter_money{
+    border: 1px solid transparent;
+    width: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
+
+
+.input_money input{
+    width: 300px;
+    height: 25px;
+    border: 5px solid #804000;
+    color: #804000;
+    border-radius: 10px;
+    font-size: 20px;
+    font-family: 'Lilita One', sans-serif;
+    text-align: center;
+    cursor: pointer;
+}
+
+.btn_clean button{
+    width: 100px;
+    height: 37px;
+    border: 5px solid #804000;
+    color: #804000;
+    border-radius: 10px;
+    font-size: 20px;
+    font-family: 'Lilita One', sans-serif;
+    margin-top: 40px;
+    cursor: pointer;
+}
+
+label{
+    font-size: 30px;
+}
+
+.btn_submit{
+    border: 1px solid transparent;
+    width: 500px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn_submit button{
+    width: 150px;
+    height: 50px;
+    border: 5px solid #ffffff;
+    background-color: #5c330a;
+    color: #ffff;
+    border-radius: 10px;
+    font-size: 20px;
+    font-family: 'Lilita One', sans-serif;
+    cursor: pointer;
+    font-size: 25px;
+    margin-top: 10px;
+}
+
+.btn_submit button:hover{
+    background-color: green;
+}
+
+.body_chart{
+    border: 5px solid rgb(255, 255, 255);
+    border-radius: 25px;
+    width: 200px;
+    height: 210px;
+    background-color: #5c330a;
+    color: #ffffff;
+    font-size: 20px;
+    font-family: 'Exo 2', sans-serif;
+}
+
+.body_chart h2{
+    text-align: center;
+}
+
+.body_chart p{
+    font-size: 15px;   
+    text-align: center; 
+}
