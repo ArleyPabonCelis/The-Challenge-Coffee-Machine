@@ -15,8 +15,8 @@ function App() {
 
       setTimeout(() => {
         setShowLoading2(false);
-      }, 2000);
-    }, 2000);
+      }, 3000);
+    }, 3000);
   }, []);
 
   if(loading){
