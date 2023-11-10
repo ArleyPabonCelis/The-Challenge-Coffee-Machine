@@ -24,20 +24,22 @@ function OrderList({orders, handleBack, handleDeleteOrder}) {
         
         if (isNaN(inputValueNumber)) {
             setMessage("Enter a valid value in the field");
-            setClassMessageList('wrong')
+            setClassMessageList('wrong');
+            setIsValidationCorrect(false);
             return;
         }
 
         if (inputValueNumber < additionOrder) {
             setMessage("Not enough money");
             setClassMessageList('wrong')
+            setIsValidationCorrect(false);
         } else {
             const change = inputValueNumber - additionOrder;
             setMessage(`Your order has been accepted. His change is: ${change.toFixed(1)}`);
             setClassMessageList('right')
+            setIsValidationCorrect(true);
         }
 
-        setIsValidationCorrect(classMessageList === 'right');
     };
 
     useEffect(() => {
@@ -46,7 +48,7 @@ function OrderList({orders, handleBack, handleDeleteOrder}) {
         if (isValidationCorrect) {
             timeout = setTimeout(() => {
                 setShowCheckOrder(true);
-            }, 3000);
+            }, 4000);
         } else {
             timeout = setTimeout(() => {
                 setMessage(null);

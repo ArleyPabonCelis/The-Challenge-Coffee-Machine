@@ -1,0 +1,15 @@
+.content_check{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    color: #ffff;
+    font-weight: bold;
+    font-family: 'Lilita One', sans-serif;
+}
+
+.img_check{
+    width: 200px;
+    height: 200px;
+}

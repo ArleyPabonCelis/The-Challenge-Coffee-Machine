@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import ImgLoading2 from '../img/logo_coffeeMachine.png'
-
+import CheckOrderImg from '../img/checkOrder.png'
+import '../css/checkOrder.css'
 
 function CheckOrder() {
     useEffect(() => {
@@ -20,8 +21,10 @@ function CheckOrder() {
                     <h1>MAKE YOUR ORDER</h1>
                     <img className='size_title' src={ImgLoading2} alt='logo coffee machine'/>
                 </div>
-                <div className='content'>
-                    <h1>SI FUNCIONA</h1>
+                <div className='content_check'>
+                    <img className='img_check' src={CheckOrderImg} alt='Check'/>
+                    <p>Orden recibida</p>
+                    <p>Thank you for your purchase.</p>
                 </div>
             </div>
         </div>

@@ -335,7 +335,7 @@ function OrderForm() {
         )}
 
         {addOrder.length > 0 && (
-            <div className=''>
+            <div className='object_post'>
                 <h2>Order Result:</h2>
                 <pre>{JSON.stringify(addOrder, null, 2)}</pre>
             </div>
