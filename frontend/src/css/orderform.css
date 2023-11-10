@@ -155,7 +155,7 @@
     border-radius: 10px;
     font-size: 20px;
     font-family: 'Lilita One', sans-serif;
-    margin-top: 40px;
+    margin-top: 45px;
     cursor: pointer;
 }
 
@@ -168,6 +168,11 @@ label{
     width: 500px;
     cursor: pointer;
     text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 22px;
 }
 
 .btn_submit button{

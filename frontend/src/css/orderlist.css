@@ -1,0 +1,152 @@
+.content_list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+
+.btn_prepare{
+    width: 150px;
+    height: 50px;
+    border: 5px solid #ffffff;
+    background-color: #5c330a;
+    color: #ffff;
+    border-radius: 10px;
+    font-size: 20px;
+    font-family: 'Lilita One', sans-serif;
+    cursor: pointer;
+    font-size: 25px;
+    margin-top: 50px;  
+}
+
+.btn_prepare:hover{
+    background-color: green;
+}
+
+.btn_back{
+    width: 100px;
+    height: 50px;
+    border: 5px solid #ffffff;
+    background-color: #5c330a;
+    color: #ffff;
+    border-radius: 10px;
+    font-size: 20px;
+    font-family: 'Lilita One', sans-serif;
+    cursor: pointer;
+    font-size: 25px;
+    margin-top: 50px;  
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px;
+}
+
+.btn_back:hover{
+    background-color: #ffffff;
+    color: #5c330a;
+    border: 5px solid #5c330a;
+}
+
+.body_list {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    border: 1px solid transparent;
+    height: 300px;
+    width: 800px;
+}
+
+.card {
+    border: 3px solid #5c330a;
+    background-color: #ffff;
+    border-radius: 10px;
+    color: #5c330a;
+    margin: 10px;
+    width: 150px;
+    height: 130px;
+    text-align: center;
+    position: relative;
+}
+
+.card h3{
+    background-color: #5c330a;
+    color: #ffff;
+    border-radius: 10px;
+    width: 120px;
+    display: flex;
+    justify-content: center;
+    margin-left: 16px; /* Arreglar */
+}
+
+.foot_list{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 30px;
+}
+
+.total_cost p{
+    font-size: 20px;
+    color: #ffff;
+    border: 2px solid #ffff;
+    font-weight: bold;
+    background-color: #5c330a;
+    height: 32px;
+    width: 280px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    border-radius: 20px;
+    margin-left: -240px;
+}
+
+.message_list {
+    border: 1px solid transparent;
+    height: 140px;
+    width: 300px;
+    position: fixed;
+    bottom: 20px; 
+    right: 20px; 
+    
+}
+
+.message_trans {
+    border: 1px solid transparent;
+    height: 10px;
+    width: 250px;   
+}
+
+.messages_p{
+    border: 5px solid #ffff;
+    height: 140px;
+    width: 300px;
+    text-align: center;
+    font-size: 28px;
+    margin-top: 15px;
+    border-radius: 25px;
+    color: rgb(255, 255, 255);
+    font-family: 'Exo 2', sans-serif;
+    text-align: center;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    font-weight: bold;
+    position: fixed;
+    bottom: -15px; 
+    right: 20px;
+}
+
+.del_card{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    background-color: #f44336; 
+    color: #fff; 
+    border: none;
+    padding: 1px 4px;
+    font-size: 10px;
+    border-radius: 3px;
+}

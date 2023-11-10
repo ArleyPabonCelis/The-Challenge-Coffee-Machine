@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import '../css/orderform.css';
 import ImgLoading2 from '../img/logo_coffeeMachine.png'
 import Validations from './Validations.jsx';
-
+import OrderList from './OrderList.jsx';
+import CheckOrder from './CheckOrder';
 
 function OrderForm() {
     const [drinkOptions, setDrinkOptions] = useState([]);
@@ -11,9 +12,14 @@ function OrderForm() {
     const [sugarAmount, setSugarAmount] = useState(0);
     const [isExtraHot, setIsExtraHot] = useState(false);
     const [money, setMoney] = useState();
-    const [orderResult, setOrderResult] = useState(null);
     const [validationMessage, setValidationMessage] = useState(null);
     const [classMessage, setClassMessage] = useState('');
+    const [orderResult, setOrderResult] = useState(null);
+    const [addOrder, setAddOrder] = useState([]);
+    const [showOrderList, setShowOrderList] = useState(false);
+    const [lastOrderId, setLastOrderId] = useState(-1);
+    const [isValidationCorrect, setIsValidationCorrect] = useState(false);
+    const [showCheckOrder, setShowCheckOrder] = useState(false);
   
     useEffect(() => {
         fetch('http://localhost:8080/CoffeeMachine/allDrinks')
@@ -22,6 +28,7 @@ function OrderForm() {
             const options = data.map(drink => ({
               id: drink._id,
               label: drink.drink,
+              cost: drink.cost,
             }));
             setDrinkOptions(options);
     
@@ -37,7 +44,7 @@ function OrderForm() {
     const prepareOrder = () => {
         const order = {
             drinkType: selectedDrink,
-            money,
+            money: money || 0,
             extrahot: isExtraHot,
             sugars: sugarAmount,
         };
@@ -109,6 +116,83 @@ function OrderForm() {
         }
         
         setValidationMessage(validationMessage);
+        setClassMessage(className);
+        setIsValidationCorrect(className === 'right');
+
+        if(validationMessage){
+            setTimeout(() => {
+                setValidationMessage(null);
+                if (className === 'right') {
+                    setShowCheckOrder(true);
+                }
+            }, 3000)
+        }
+    };
+
+    const addListOrder = () => {
+        const selectedOption = drinkOptions.find(option => option.id === selectedDrink)
+        const orderList = {
+            id : lastOrderId + 1,
+            drinkType: selectedOption ? selectedOption.label : 'drinkList',
+            sugars: sugarAmount,
+            extrahot: isExtraHot ? 'Yes' : 'No',
+            money: money || (selectedOption ? selectedOption.cost : 0), 
+        };
+        console.log(orderList);
+        setLastOrderId(lastOrderId + 1)
+
+        let validationMessage = null;
+        let className = "";     
+
+        if (orderList.drinkType === 'drinkList' || orderList.drinkType === '') {
+            validationMessage = 'The drink type should be tea, coffee, or chocolate.';
+            className = 'wrong';
+        }else if(orderList.drinkType === 'Tea' && orderList.money < 0.4){
+            validationMessage = 'The cost of Tea is 0.4';
+            className = 'wrong';
+        }else if(orderList.drinkType === 'Coffee' && orderList.money < 0.5){
+            validationMessage = 'The cost of Coffee is 0.5';
+            className = 'wrong';
+        }else if(orderList.drinkType === 'Chocolate' && orderList.money < 0.6){
+            validationMessage = 'The cost of Chocolate is 0.6'; 
+            className = 'wrong';
+        }else if(orderList.sugars < 0 || orderList.sugars > 2){
+            validationMessage = 'The number of sugars should be between 0 and 2.';
+            className = 'wrong';
+        }else if(addOrder.length === 8){
+            validationMessage = 'No more orders can be added. Limit reached';
+            className = 'wrong';
+        }        else{          
+            if(orderList.sugars === 0 && orderList.extrahot === false){
+                if(orderList.drinkType === 'Tea'){
+                    validationMessage = `You have ordered a Tea`;
+                }else if(orderList.drinkType === 'Coffee'){
+                    validationMessage = `You have ordered a Coffee`;
+                }else if(orderList.drinkType === 'Chocolate'){
+                    validationMessage = `You have ordered a Chocolate`;
+                }
+            }else if(orderList.sugars > 0 && orderList.extrahot === false){
+                if(orderList.drinkType === 'Tea'){
+                    validationMessage = `You have ordered a Tea with ${orderList.sugars} sugars`;
+                }else if(orderList.drinkType === 'Coffee'){
+                    validationMessage = `You have ordered a Coffee with ${orderList.sugars} sugars`;
+                }else if(orderList.drinkType === 'Chocolate'){
+                    validationMessage = `You have ordered a Chocolate with ${orderList.sugars} sugars`;
+                }
+            }else if(orderList.sugars > 0 && orderList.extrahot === true){
+                if(orderList.drinkType === 'Tea'){
+                    validationMessage = `You have ordered a Tea extra hot with ${orderList.sugars} sugars`;
+                }else if(orderList.drinkType === 'Coffee'){
+                    validationMessage = `You have ordered a Coffee extra hot with ${orderList.sugars} sugars`;
+                }else if(orderList.drinkType === 'Chocolate'){
+                    validationMessage = `You have ordered a Chocolate extra hot with ${orderList.sugars} sugars`;
+                }
+            }  
+            setAddOrder([...addOrder, orderList])
+            className = 'right';
+        }
+        
+        setValidationMessage(validationMessage);
         setClassMessage(className)
 
         if(validationMessage){
@@ -116,16 +200,28 @@ function OrderForm() {
                 setValidationMessage(null)
             }, 3000)
         }
+    }
+
+    const handleClean = () => {
+        setSelectedDrink('');
+        setSugarAmount(0);
+        setIsExtraHot(false);
+        setMoney('');
+        setOrderResult(null);
     };
 
-    
-    const handleClean = () => {
-    setSelectedDrink('');
-    setSugarAmount(0);
-    setIsExtraHot(false);
-    setMoney('');
-    setOrderResult(null);
+    const showListOrder = () => {
+        setShowOrderList(true);
     };
+
+    const handleBack = () => {
+        setShowOrderList(false);
+    };
+
+    const handleDeleteOrder = (orderId) => {
+        const updatedOrders = addOrder.filter(order => order.id !== orderId);
+        setAddOrder(updatedOrders);
+      };
 
 
     return (
@@ -188,7 +284,7 @@ function OrderForm() {
                                         style={{
                                             appearance: "textfield"
                                         }}
-                                        value={money}
+                                        value={money || 0}
                                         onChange={e => setMoney(parseFloat(e.target.value))}
                                     />
                                 </div>
@@ -197,11 +293,19 @@ function OrderForm() {
                                 </div>
                             </div>
 
-                            <div className='btn_submit'>
-                                <button type="button" onClick={prepareOrder}>Prepare</button>
-                            </div>
+                            <div className='dad_btn'>
+                            {showOrderList ? (
+                                <OrderList handleBack={handleBack} orders={addOrder} handleDeleteOrder={handleDeleteOrder}/>
+                            ) : (
+                                    <div className='btn_submit'>
+                                        <button type="button" onClick={addListOrder}>Add</button>
+                                        <button type="button" onClick={showListOrder}>Show Order</button>
+                                        <button type="button" onClick={prepareOrder}>Prepare</button>
+                                    </div>
+                             )}
+                             {showCheckOrder && <CheckOrder/>}
+                             </div>
             
-
                         </form>
                     </div>
                     <div className='body_body'>
@@ -216,9 +320,7 @@ function OrderForm() {
                             </ul>
                             <p>Choose your favorite</p>
                         </div>
-                        {validationMessage && <Validations message={validationMessage} classMg={classMessage} />}    
-
-                        
+                        {validationMessage && <Validations message={validationMessage} classMg={classMessage}  />}        
                     </div>
 
 
@@ -226,11 +328,20 @@ function OrderForm() {
             </div>
         </div>
         {orderResult && (
-        <div className='object_post'>
-          <h2>Order Result:</h2>
-          <pre>{JSON.stringify(orderResult, null, 2)}</pre>
-        </div>
+            <div className='object_post'>
+            <h2>Order Result:</h2>
+            <pre>{JSON.stringify(orderResult, null, 2)}</pre>
+            </div>
         )}
+
+        {addOrder.length > 0 && (
+            <div className=''>
+                <h2>Order Result:</h2>
+                <pre>{JSON.stringify(addOrder, null, 2)}</pre>
+            </div>
+        )}
+
+        
         </>
     );
 }
